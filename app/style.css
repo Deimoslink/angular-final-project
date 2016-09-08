@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+html {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	min-width: 630px;
+}
+
+header {
+	height: 100px;
+	background-color: #3f51b5;
+	font-size: 26px;
+	color: white;
+	line-height: 100px;
+	vertical-align: middle;
+}
+
+.flex-element {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.account-wrapper {
+	display:flex;
+	align-items: center;
+
+	height: 100px;
+}
+
+.account-info {
+	line-height: 16px;
+	padding: 10px;
+	color:#8d9ae0;
+}
+
+.account-name {
+	display:block;
+	font-size: 14px;
+}
+
+.account-status {
+	font-size: 12px;
+}
+
+.avatar {
+	background-color: white;
+	border-radius: 50%;
+	height:50px;
+	width:50px;
+}
+
+.custom-form-control {
+	width: 370px !important;
+	position: relative;
+	border-radius: 2px !important;
+}
+
+.custom-input-group-addon {
+	line-height: 34px;
+	vertical-align: middle;
+	z-index:9999;
+	position: absolute;
+	right:10px;
+	color:#CCC;
+}
+
+.interface {
+	display: flex;
+	justify-content: space-between;
+}
+
+.interface button {
+	padding-left:35px;
+	padding-right:35px;
+}
+
+.column1 {
+	width:20px;
+}
+
+.column2 {
+	width:50px;
+}
+
+.column3 {
+	width: calc((100vw - 180px)/3);
+}
+
+.column4, .column5 {
+	width: calc((100vw - 180px)/4);
+}
+
+.column6 {
+	width:120px;
+}
+
+.add-form {
+	width:400px;
+	margin:auto;
+}
