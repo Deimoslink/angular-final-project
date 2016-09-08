@@ -9,12 +9,8 @@
     "start": "webpack-dev-server --content-base app",
     "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
   },
-  "keywords": [
-    "webpack",
-    "angular",
-    "loftblog"
-  ],
-  "author": "Zar Zakharov",
+  "keywords": [],
+  "author": "Deimoslink",
   "license": "MIT",
   "devDependencies": {
     "webpack": "^1.13.2",
