@@ -17,6 +17,10 @@ header {
 	vertical-align: middle;
 }
 
+label {
+	color: #707386;
+}
+
 .flex-element {
 	display: flex;
 	justify-content: space-between;
@@ -26,7 +30,6 @@ header {
 .account-wrapper {
 	display:flex;
 	align-items: center;
-
 	height: 100px;
 }
 
@@ -46,7 +49,7 @@ header {
 }
 
 .avatar {
-	background-color: white;
+	background-image: url("imgs/sovse-maly-yoba.jpg");
 	border-radius: 50%;
 	height:50px;
 	width:50px;
@@ -72,9 +75,22 @@ header {
 	justify-content: space-between;
 }
 
-.interface button {
+button.btn {
 	padding-left:35px;
 	padding-right:35px;
+	background-color: white;
+	border: 1px solid #f6511e;
+	color: #f6511e;
+}
+
+.btn[disabled] {
+	border: 1px solid #ccc;
+	color: #ccc;
+}
+
+button.orange {
+	color: white; 
+	background-color: #f6511e;
 }
 
 .column1 {

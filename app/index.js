@@ -5,12 +5,18 @@ app.config(function($routeProvider) {
 	.when("/", {
 		templateUrl: "templates/main.html"
 	})
-	.when("/addition", {
-		templateUrl: "templates/addition.html"
+	.when("/items/add", {
+		templateUrl: "templates/add.html"
+	})
+	.when("/items/edit/:param", {
+		templateUrl: "templates/edit.html"
+	})
+	.when("/login", {
+		templateUrl: "templates/login.html"
 	})
 });
 
-app.controller('mainController', function($scope,$http) {
+app.controller('mainController', function($scope, $http, $location) {
 	$scope.sortType = 'name';
 	$scope.sortReverse= false;
 	$scope.searchQuery = '';
@@ -19,6 +25,10 @@ app.controller('mainController', function($scope,$http) {
 		.then(function(response) {
 			$scope.mainArray = response.data;
 		});
+
+	$scope.go = function(path) {
+		$location.path(path);
+	};
 
 	$scope.save = function() {
 		console.log("save");
@@ -47,6 +57,7 @@ app.controller('mainController', function($scope,$http) {
 	$scope.archivable = false;
 
 
+
 	$scope.searchForArchivable = function () {
 		$scope.archivable = $scope.mainArray.some(function(item) {
 			return item.selected && !item.archived;
@@ -60,11 +71,13 @@ app.controller('mainController', function($scope,$http) {
 				item.archived = true;
 			};
 		});
+		$scope.archivable = false;
 	}
 
 	$scope.unarchive = function(item) {
 		var index = $scope.mainArray.indexOf(item);
 		$scope.mainArray[index].archived = false;
+		$scope.archivable = true;
 	}
 
 	$scope.delete = function (x) {
@@ -72,7 +85,11 @@ app.controller('mainController', function($scope,$http) {
 		$scope.mainArray.splice(index, 1);     
 	};
 
+	$scope.currentEdited = undefined;
 
+	$scope.edit = function (item) {
+		$scope.currentEdited = item;  
+	};
 
 	$scope.shownElements = 5;
 

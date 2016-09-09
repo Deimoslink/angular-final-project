@@ -6,7 +6,7 @@
 					<div class="avatar"></div>
 					<div class="account-info">
 						<span class="account-name">Ryan Kelly</span>
-						<span class="account-status">logout</span>
+						<span ng-click="go('/login')" class="account-status">logout</span>
 					</div>
 				</div>
 			</div>		
@@ -28,8 +28,8 @@
 	</form>
 
 	<div class="button-wrapper">
-		<button class="btn btn-default" ng-click="archive()" ng-disabled="!archivable">Archive Selected</button>
-		<button class="btn btn-default">Add New</button>
+		<button class="btn" ng-click="archive()" ng-disabled="!archivable">Archive Selected</button>
+		<button class="btn orange" ng-click="go('/items/add')">Add New</button>
 	</div>
 </div>
 	
@@ -38,36 +38,36 @@
 		<thead>
 			<tr>
 				<td class="column1">
-					<input type="checkbox" ng-click="toggleAll()">
+					<input type="checkbox" ng-click="toggleAll(); searchForArchivable()">
 				</td>
 				<td class="column2">
-					<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+					<a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
 					ID
 						<span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
 						<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
 					</a>
 				</td>
 				<td class="column3">
-					<a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse">
+					<a href="" ng-click="sortType = 'title'; sortReverse = !sortReverse">
 					Title
 						<span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
 						<span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
 					</a>
 				</td>
 				<td class="column4">
-					<a href="#" ng-click="sortType = 'author'; sortReverse = !sortReverse">
+					<a href="" ng-click="sortType = 'author'; sortReverse = !sortReverse">
 					Author
 						<span ng-show="sortType == 'author' && !sortReverse" class="fa fa-caret-down"></span>
 						<span ng-show="sortType == 'author' && sortReverse" class="fa fa-caret-up"></span>
 					</a>
 				</td>
 				<td class="column5">
-					<a href="#">
+					<a href="">
 					Duration 
 					</a>
 				</td>
 				<td class="column6">
-					<a href="#">
+					<a href="">
 					Action
 					</a>
 				</td>
@@ -84,12 +84,12 @@
 				<td>{{ item.author }}</td>
 				<td>{{ item.duration }}</td>
 				<td>
-					<a ng-show="!item.archived" href="#">Edit</a>
-					<a ng-show="!item.archived" href="#" ng-click="delete(item)">Delete</a>
-					<a ng-show="item.archived" href="#" ng-click="unarchive(item)">Unarchive</a>
+					<a ng-show="!item.archived" href="" ng-click="go('/items/edit/'+item.id); edit(item)">Edit</a>
+					<a ng-show="!item.archived" href="" ng-click="delete(item)">Delete</a>
+					<a ng-show="item.archived" href="" ng-click="unarchive(item)">Unarchive</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<button class="btn btn-default" ng-click="showMore()">Show More</button>
+	<button class="btn" ng-click="showMore()">Show More</button>
 </div>
