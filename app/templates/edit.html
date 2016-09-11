@@ -16,7 +16,7 @@
 <div class="add-form">
 	<form>
 		<h1>Edit existing course</h1>
-		<p>{{console.log($location)}}</p>
+		<p>{{$location.absUrl()}}</p>
 		<div class="form-group">
 			<label for="course-title">Course Title *</label>
 			<input ng-model="currentEdited.title" type="text" class="form-control" id="course-title">
@@ -34,7 +34,7 @@
 			<input ng-model="currentEdited.duration" type="text" class="form-control" id="course-duration">
 		</div>
 		<div class="button-wrapper">
-			<button class="btn orange">Save</button>
+			<button class="btn orange" ng-click="save(); go('/')">Save</button>
 			<button class="btn" ng-click="go('/')">Cancel</button>
 		</div>
 	</form>

@@ -87,9 +87,17 @@ app.controller('mainController', function($scope, $http, $location) {
 
 	$scope.currentEdited = undefined;
 
-	$scope.edit = function (item) {
-		$scope.currentEdited = item;  
+	$scope.edit = function (x) {
+		$scope.currentEdited = angular.copy(x, $scope.currentEdited);
 	};
+
+	$scope.save = function () {
+		var currentId = $scope.currentEdited.id;
+		var index = ($scope.mainArray.findIndex(function(x){
+			return x.id === currentId;
+		}));
+		$scope.mainArray[index] = angular.copy($scope.currentEdited, $scope.mainArray[index])
+	};	
 
 	$scope.shownElements = 5;
 
