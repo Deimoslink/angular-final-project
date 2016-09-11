@@ -80,11 +80,13 @@
 					<input type="checkbox" ng-model="item.selected" ng-change="searchForArchivable()">
 				</td>
 				<td>{{ item.id }}</td>
-				<td>{{ item.title }}</td>
-				<td>{{ item.author }}</td>
-				<td>{{ item.duration }}</td>
 				<td>
-					<a ng-show="!item.archived" href="" ng-click="go('/items/edit/'+item.id); edit(item)">Edit</a>
+					<a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+				</td>
+				<td>{{ item.author }}</td>
+				<td>{{ item.duration | date: "mm:ss"}}</td>
+				<td>
+					<a ng-show="!item.archived" href="#/items/edit/{{item.id}}">Edit</a>
 					<a ng-show="!item.archived" href="" ng-click="delete(item)">Delete</a>
 					<a ng-show="item.archived" href="" ng-click="unarchive(item)">Unarchive</a>
 				</td>

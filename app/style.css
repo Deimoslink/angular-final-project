@@ -27,6 +27,10 @@ label {
 	align-items: center;
 }
 
+span.warning {
+	color: red;
+}
+
 .account-wrapper {
 	display:flex;
 	align-items: center;
