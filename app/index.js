@@ -1,6 +1,43 @@
-
-
 var app = angular.module('myApp', ["ngRoute"]);
+
+app.run(['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+    $rootScope.$on('$routeChangeStart', function () {
+
+        if (!AuthService.isLoggedIn()) {
+            console.log('DENY');
+            $location.path('/login');
+        }
+
+    });
+}]);
+
+app.factory('AuthService', function($window, $location){
+	var storage = $window.localStorage;
+	return {
+
+		login: function(name) {
+			console.log("welcome, "+name);
+			storage.setItem("user",name);
+		},
+
+		logout: function() {
+			storage.removeItem("user");
+			$location.path('/login');
+		},
+
+		isLoggedIn: function() {
+
+			var user = storage.getItem('user');
+			return user;
+
+		}
+	}
+
+})
+
+
+
+
 
 app.config(function($routeProvider) {
 	$routeProvider
@@ -18,6 +55,43 @@ app.config(function($routeProvider) {
 			itemsSvc.getAll().then(function(response) {
 				$scope.mainArray = response.data;
 			});
+			$scope.toggleAll = function() {
+				if (!$scope.selected) {
+					$scope.mainArray.forEach(function(item) {
+						item.selected = true;
+					});
+					$scope.selected = true;		
+				} else {
+					$scope.mainArray.forEach(function(item) {
+						item.selected = false;
+					});
+					$scope.selected = false;
+				}
+			}
+
+			$scope.archivable = false;
+
+			$scope.searchForArchivable = function () {
+				$scope.archivable = $scope.mainArray.some(function(item) {
+					return item.selected && !item.archived;
+				});
+			};
+
+			$scope.archive = function() {
+				$scope.mainArray.forEach(function(item) {
+					if (item.selected) {
+						item.archived = true;
+					};
+				});
+				$scope.archivable = false;
+			}
+
+			$scope.unarchive = function(item) {
+				var index = $scope.mainArray.indexOf(item);
+				$scope.mainArray[index].archived = false;
+
+				$scope.searchForArchivable();
+			}
 		}
 	})
 	.when("/items/add", {
@@ -48,14 +122,17 @@ app.config(function($routeProvider) {
 	})
 	.when("/login", {
 		templateUrl: "templates/login.html",
-		controller: function($scope, signInData) {
+		controller: function($scope, signInData, AuthService) {
 			$scope.username;
 			$scope.password;
 			$scope.login = function() {
-				if ($scope.username === signInData.username && $scope.password === signInData.password) {console.log("success")};
+				if ($scope.username === signInData.username && $scope.password === signInData.password) {
+					AuthService.login($scope.username);
+				};
 			}
 		}
-	})
+	});
+
 });
 
 app.constant('API', 'http://localhost:3000/');
@@ -72,7 +149,9 @@ app.factory('itemsSvc', function($http, API) {
 	}
 });
 
-app.controller('mainController', function($scope, $http, $location, itemsSvc) {
+
+
+app.controller('mainController', function($scope, $location, AuthService) {
 	$scope.sortType = 'name';
 	$scope.sortReverse= false;
 	$scope.searchQuery = '';
@@ -83,44 +162,6 @@ app.controller('mainController', function($scope, $http, $location, itemsSvc) {
 
 	$scope.selected = false;
 
-	$scope.toggleAll = function() {
-		if (!$scope.selected) {
-			$scope.mainArray.forEach(function(item) {
-				item.selected = true;
-			});
-			$scope.selected = true;		
-		} else {
-			$scope.mainArray.forEach(function(item) {
-				item.selected = false;
-			});
-			$scope.selected = false;
-		}
-	}
-
-	$scope.archivable = false;
-
-	$scope.searchForArchivable = function () {
-		$scope.archivable = $scope.mainArray.some(function(item) {
-			return item.selected && !item.archived;
-		});
-	};
-
-	$scope.archive = function() {
-		$scope.mainArray.forEach(function(item) {
-			if (item.selected) {
-				item.archived = true;
-			};
-		});
-		$scope.archivable = false;
-	}
-
-	$scope.unarchive = function(item) {
-		var index = $scope.mainArray.indexOf(item);
-		$scope.mainArray[index].archived = false;
-		$scope.archivable = true;
-	}
-
-
 	// $scope.shownElements = 5;
 
 	// $scope.paginationLimit = function() {
@@ -130,8 +171,6 @@ app.controller('mainController', function($scope, $http, $location, itemsSvc) {
 	// $scope.showMore = function() {
 	// 	$scope.shownElements += 3;
 	// };
-
-
 });
 
 app.directive('myDirective', function() {

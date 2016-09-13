@@ -23,8 +23,15 @@
 		</div>
 		<div class="form-group">
 			<label for="course-link">Course Link *</label>
-			<input ng-model="item.url" type="text" class="form-control" id="course-link" name="courseLink" required>
+			<input ng-model="item.url"
+				ng-pattern="/^(https?\:\/\/)/"
+				type="text"
+				class="form-control"
+				id="course-link"
+				name="courseLink"
+				required>
 			<span class="warning" ng-show="editForm.courseLink.$error.required">Course Link is required!</span>
+			<span class="warning" ng-show="editForm.courseLink.$error.pattern">Type in the correct url!</span>	
 		</div>
 		<div class="form-group">
 			<label for="course-author">Course Author *</label>
