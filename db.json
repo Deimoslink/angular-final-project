@@ -114,35 +114,11 @@
     },
     {
       "archived": false,
-      "title": 1,
-      "url": 1,
-      "author": 1,
-      "duration": 1,
-      "id": 15
-    },
-    {
-      "archived": false,
-      "title": 12,
-      "url": 123,
-      "author": 312,
-      "duration": 123,
-      "id": 16
-    },
-    {
-      "archived": false,
-      "title": 645645,
-      "url": 456456,
-      "author": 456456,
-      "duration": 45645645,
-      "id": 17
-    },
-    {
-      "archived": false,
       "title": "test",
       "url": "test",
       "author": "test",
-      "duration": 123,
-      "id": 18
+      "duration": 12345,
+      "id": 15
     }
   ]
 }

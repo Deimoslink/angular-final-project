@@ -6,8 +6,18 @@ app.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
 		templateUrl: "templates/main.html",
-		controller: function($scope, $http, API) {
-			
+		controller: function($scope, $http, API, itemsSvc) {
+			$scope.delete = function (x) {
+				var answer = confirm("Are you sure you want to delete the selected item?");
+				if (answer) {
+					$http.delete(API + 'items/' + x.id, $scope.item); //Нормально ли так делать вообще?
+					var index = $scope.mainArray.indexOf(x);
+					$scope.mainArray.splice(index, 1);
+				};     
+			};
+			itemsSvc.getAll().then(function(response) {
+				$scope.mainArray = response.data;
+			});
 		}
 	})
 	.when("/items/add", {
@@ -37,11 +47,19 @@ app.config(function($routeProvider) {
 		}
 	})
 	.when("/login", {
-		templateUrl: "templates/login.html"
+		templateUrl: "templates/login.html",
+		controller: function($scope, signInData) {
+			$scope.username;
+			$scope.password;
+			$scope.login = function() {
+				if ($scope.username === signInData.username && $scope.password === signInData.password) {console.log("success")};
+			}
+		}
 	})
 });
 
 app.constant('API', 'http://localhost:3000/');
+app.constant('signInData', {username: 'deimoslink',	password: 'qwerty'});
 
 app.factory('itemsSvc', function($http, API) {
 	return {
@@ -59,25 +77,8 @@ app.controller('mainController', function($scope, $http, $location, itemsSvc) {
 	$scope.sortReverse= false;
 	$scope.searchQuery = '';
 
-	itemsSvc.getAll().then(function(response) {
-		$scope.mainArray = response.data;
-	});
-
-	// $http.get("https://api.myjson.com/bins/4fv94")
-	// 	.then(function(response) {
-	// 		$scope.mainArray = response.data;
-	// 	});
-
 	$scope.go = function(path) {
 		$location.path(path);
-	};
-
-	$scope.save = function() {
-		console.log("save");
-	};
-
-	$scope.cancel = function() {
-		console.log("cancel");
 	};
 
 	$scope.selected = false;
@@ -98,14 +99,11 @@ app.controller('mainController', function($scope, $http, $location, itemsSvc) {
 
 	$scope.archivable = false;
 
-
-
 	$scope.searchForArchivable = function () {
 		$scope.archivable = $scope.mainArray.some(function(item) {
 			return item.selected && !item.archived;
 		});
 	};
-
 
 	$scope.archive = function() {
 		$scope.mainArray.forEach(function(item) {
@@ -122,29 +120,16 @@ app.controller('mainController', function($scope, $http, $location, itemsSvc) {
 		$scope.archivable = true;
 	}
 
-	$scope.delete = function (x) {
-		var answer = confirm("Are you sure you want to delete the selected item?")
-		if (answer) {var index = $scope.mainArray.indexOf(x);
-		$scope.mainArray.splice(index, 1)};     
-	};
 
-	// $scope.currentEdited = undefined;
+	// $scope.shownElements = 5;
 
-	// $scope.edit = function (x) {
-	// 	$scope.currentEdited = angular.copy(x, $scope.currentEdited);
+	// $scope.paginationLimit = function() {
+	// 	return $scope.shownElements;
 	// };
 
-
-
-	$scope.shownElements = 5;
-
-	$scope.paginationLimit = function() {
-		return $scope.shownElements;
-	};
-
-	$scope.showMore = function() {
-		$scope.shownElements += 3;
-	};
+	// $scope.showMore = function() {
+	// 	$scope.shownElements += 3;
+	// };
 
 
 });

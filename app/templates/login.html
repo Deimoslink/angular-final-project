@@ -7,19 +7,21 @@
 	</header>
 
 <div class="add-form">
-	<form>
+	<form name="loginForm">
 		<h1>Authorization</h1>
 		<div class="form-group">
 			<label for="username">Usermane</label>
-			<input type="text" class="form-control" id="username">
+			<input ng-model="username" type="text" class="form-control" name="username" required>
+			<span class="warning" ng-show="loginForm.username.$touched && loginForm.username.$invalid">Username is obligatory!</span>
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password">
+			<input ng-model="password" type="password" class="form-control" name="password" required>
+			<span class="warning" ng-show="loginForm.password.$touched && loginForm.password.$invalid">Password is obligatory!</span>
 		</div>
 
 		<div class="button-wrapper">
-			<button class="btn orange">Login</button>
+			<button class="btn orange" ng-disabled="loginForm.username.$invalid || loginForm.password.$invalid" ng-click="login();">Login</button>
 		</div>
 	</form>
 </div>
