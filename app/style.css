@@ -50,6 +50,7 @@ span.warning {
 
 .account-status {
 	font-size: 12px;
+	cursor: pointer;
 }
 
 .avatar {

@@ -1,22 +1,6 @@
 {
   "items": [
     {
-      "id": 1,
-      "title": "Directives",
-      "author": "John",
-      "duration": 540000,
-      "url": "https://www.youtube.com/watch?v=GOKcfyo3-xE",
-      "archived": false
-    },
-    {
-      "id": 2,
-      "title": "Filters",
-      "author": "Abigale",
-      "duration": 600000,
-      "url": "https://www.youtube.com/watch?v=QOqzziWdVzk",
-      "archived": false
-    },
-    {
       "id": 3,
       "title": "MVC",
       "author": "Chris",
@@ -114,51 +98,19 @@
     },
     {
       "archived": false,
-      "title": "asdas",
+      "title": "test",
       "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
       "author": "test",
-      "duration": 123123123,
+      "duration": 54321,
       "id": 15
     },
     {
       "archived": false,
+      "title": "how",
       "url": "http://lol",
-      "title": "dfsdf",
-      "author": "sdfsdf",
-      "duration": 12315412,
+      "author": "tre",
+      "duration": 1341,
       "id": 16
-    },
-    {
-      "archived": false,
-      "title": 1231,
-      "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
-      "author": 123123,
-      "duration": 12312312,
-      "id": 17
-    },
-    {
-      "archived": false,
-      "title": 12341234,
-      "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
-      "author": 12341234,
-      "duration": 12341234,
-      "id": 18
-    },
-    {
-      "archived": false,
-      "title": "1431`234",
-      "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
-      "author": 1231,
-      "duration": 123123123,
-      "id": 19
-    },
-    {
-      "archived": false,
-      "title": 1231,
-      "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
-      "author": 13241234,
-      "duration": 12341234,
-      "id": 20
     }
   ]
 }
