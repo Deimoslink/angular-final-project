@@ -96,6 +96,13 @@ app.controller('mainController', function($scope, $location, itemsSvc, AuthServi
 
 app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 	$scope.user = $window.localStorage.user;
+
+	itemsSvc.getAll().then(function(response) {
+		$scope.mainArray = response.data;
+		$scope.mainArray.forEach(function(item) {
+			item.selected = false;
+		});
+	});
 	$scope.delete = function (x) {
 		var answer = confirm("Are you sure you want to delete the selected item?");
 		if (answer) {
@@ -104,12 +111,6 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 			$scope.mainArray.splice(index, 1);
 		};     
 	};
-	itemsSvc.getAll().then(function(response) {
-		$scope.mainArray = response.data;
-		$scope.mainArray.forEach(function(item) {
-			item.selected = false;
-		});
-	});
 	$scope.toggleAll = function() {
 		if (!$scope.selected) {
 			$scope.mainArray.forEach(function(item) {
@@ -147,7 +148,9 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 	}
 });
 
-app.controller("addCtrl", function($scope, $http, API) {
+app.controller("addCtrl", function($scope, $http, API, $window) {
+	$scope.user = $window.localStorage.user;
+	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	$scope.item = {archived:false};
 	$scope.add = function () {
 		$http.post(API + 'items/', $scope.item);
@@ -155,22 +158,20 @@ app.controller("addCtrl", function($scope, $http, API) {
 	};
 });
 
-app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc) {
+app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window) {
+	$scope.user = $window.localStorage.user;
+	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	itemsSvc.get($routeParams.id).then(function(response) {
 		$scope.item = response.data;
 	});
 	$scope.save = function () {
-		var currentId = $scope.item.id;
-		var index = ($scope.mainArray.findIndex(function(x){
-			return x.id === currentId;
-		}));
-		$scope.mainArray[index] = angular.copy($scope.item, $scope.mainArray[index]);
 		$http.put(API + 'items/' + $routeParams.id, $scope.item);
+		$scope.go('/');
 	};	
 });
 
 app.controller("loginCtrl", function($scope, signInData, AuthService) {
-
+	$("[name='username'], [name='password']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	$scope.userNameTest = function() {
 		console.log($scope.username)
 	}

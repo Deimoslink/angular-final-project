@@ -6,8 +6,7 @@
       "author": "John",
       "duration": 540000,
       "url": "https://www.youtube.com/watch?v=GOKcfyo3-xE",
-      "archived": true,
-      "selected": true
+      "archived": false
     },
     {
       "id": 2,
@@ -15,8 +14,7 @@
       "author": "Abigale",
       "duration": 600000,
       "url": "https://www.youtube.com/watch?v=QOqzziWdVzk",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 3,
@@ -24,8 +22,7 @@
       "author": "Chris",
       "duration": 750000,
       "url": "https://www.youtube.com/watch?v=Ad4T-j_bOVc",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 4,
@@ -33,8 +30,7 @@
       "author": "Robert",
       "duration": 800000,
       "url": "https://www.youtube.com/watch?v=3NZlwe4bwEE",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 5,
@@ -42,8 +38,7 @@
       "author": "Alexander",
       "duration": 760000,
       "url": "https://www.youtube.com/watch?v=co4YpHTqmfQ",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 6,
@@ -51,8 +46,7 @@
       "author": "Mitchel",
       "duration": 620000,
       "url": "https://www.youtube.com/watch?v=P7YMI39sObY",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 7,
@@ -60,8 +54,7 @@
       "author": "Dimitry",
       "duration": 690000,
       "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 8,
@@ -69,8 +62,7 @@
       "author": "John",
       "duration": 450000,
       "url": "https://www.youtube.com/watch?v=AdKNlGfkyhc",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 9,
@@ -78,8 +70,7 @@
       "author": "Abigale",
       "duration": 620000,
       "url": "https://www.youtube.com/watch?v=5-juDiDTYfw",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 10,
@@ -87,8 +78,7 @@
       "author": "Chris",
       "duration": 720000,
       "url": "https://www.youtube.com/watch?v=F7O1z-Vw9Vc",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 11,
@@ -96,8 +86,7 @@
       "author": "Robert",
       "duration": 640000,
       "url": "https://www.youtube.com/watch?v=PYfczuNm0EQ",
-      "archived": false,
-      "selected": false
+      "archived": false
     },
     {
       "id": 12,
@@ -122,14 +111,6 @@
       "duration": 850000,
       "url": "https://www.youtube.com/watch?v=T1qzYsESDhc",
       "archived": false
-    },
-    {
-      "archived": false,
-      "title": "testtest",
-      "url": "http://lol",
-      "author": "test",
-      "duration": 880000000000,
-      "id": 16
     }
   ]
 }

@@ -5,8 +5,8 @@
 				<div class="account-wrapper">
 					<div class="avatar"></div>
 					<div class="account-info">
-						<span class="account-name">Ryan Kelly</span>
-						<span ng-click="go('/login')" class="account-status">logout</span>
+						<span ng-bind="user" class="account-name"></span>
+						<span ng-click="logout()" class="account-status">logout</span>
 					</div>
 				</div>
 			</div>		
