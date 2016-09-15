@@ -31,8 +31,11 @@
 		</div>
 		<div class="form-group">
 			<label for="course-author">Course Author *</label>
-			<input ng-model="item.author" type="text" class="form-control" name="courseAuthor" required>
-			<span class="warning" ng-show="addForm.courseAuthor.$touched && addForm.courseAuthor.$invalid">Course Author is required!</span>
+			<select class="form-control" ng-model="item.author" name="courseAuthor" required>
+				<option ng-repeat="x in names">{{x}}</option>
+			</select>
+			<!-- <input ng-model="item.author" type="text" class="form-control" name="courseAuthor" required>
+			<span class="warning" ng-show="addForm.courseAuthor.$touched && addForm.courseAuthor.$invalid">Course Author is required!</span> -->
 		</div>
 		<div class="form-group">
 			<label for="course-duration">Course Duration</label>

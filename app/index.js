@@ -149,6 +149,7 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 });
 
 app.controller("addCtrl", function($scope, $http, API, $window) {
+	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	$scope.item = {archived:false};
@@ -159,6 +160,7 @@ app.controller("addCtrl", function($scope, $http, API, $window) {
 });
 
 app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window) {
+	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	itemsSvc.get($routeParams.id).then(function(response) {
