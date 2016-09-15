@@ -42,8 +42,12 @@ app.factory('itemsSvc', function($http, API) {
 	}
 });
 
-app.config(function($routeProvider) {
+app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
+	.when("/main", {
+		templateUrl: "templates/main.html",
+		controller: "mainCtrl"
+	})
 	.when("/items/add", {
 		templateUrl: "templates/add.html",
 		controller: "addCtrl"
@@ -56,12 +60,9 @@ app.config(function($routeProvider) {
 		templateUrl: "templates/login.html",
 		controller: "loginCtrl"
 	})
-	.otherwise({
-		templateUrl: "templates/main.html",
-		controller: "mainCtrl"
-	});
+		.otherwise({redirectTo:'/main'});
 
-});
+}]);
 
 app.constant('API', 'http://localhost:3000/');
 app.constant('signInData', {username: 'deimoslink',	password: 'qwerty'});
@@ -105,6 +106,9 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 	};
 	itemsSvc.getAll().then(function(response) {
 		$scope.mainArray = response.data;
+		$scope.mainArray.forEach(function(item) {
+			item.selected = false;
+		});
 	});
 	$scope.toggleAll = function() {
 		if (!$scope.selected) {
@@ -129,6 +133,7 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 		$scope.mainArray.forEach(function(item) {
 			if (item.selected) {
 				item.archived = true;
+				$http.put(API + 'items/' + item.id, item);
 			};
 		});
 		$scope.archivable = false;
@@ -136,6 +141,7 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 
 	$scope.unarchive = function(item) {
 		var index = $scope.mainArray.indexOf(item);
+		$http.put(API + 'items/' + item.id, item);
 		$scope.mainArray[index].archived = false;
 		$scope.searchForArchivable();
 	}

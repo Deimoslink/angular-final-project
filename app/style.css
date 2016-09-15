@@ -88,14 +88,22 @@ button.btn {
 	color: #f6511e;
 }
 
+button.btn:hover, button.btn:focus{
+	color: #f6511e;
+}
+
 .btn[disabled] {
 	border: 1px solid #ccc;
 	color: #ccc;
 }
 
-button.orange {
+button.btn.orange {
 	color: white; 
 	background-color: #f6511e;
+}
+
+button.btn.orange:hover, button.btn.orange:focus,{
+	color: #ededed; 
 }
 
 .column1 {
