@@ -94,7 +94,19 @@ app.controller('mainController', function($scope, $location, itemsSvc, AuthServi
 	// };
 });
 
-app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
+app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc, $location, AuthService) {
+	$scope.sortType = 'name';
+	$scope.sortReverse= false;
+	$scope.searchQuery = '';
+
+	$scope.go = function(path) {
+		$location.path(path);
+	};
+
+	$scope.logout = function() {AuthService.logout()}
+
+	$scope.selected = false;
+
 	$scope.user = $window.localStorage.user;
 
 	itemsSvc.getAll().then(function(response) {
@@ -148,19 +160,26 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc) {
 	}
 });
 
-app.controller("addCtrl", function($scope, $http, API, $window) {
+app.controller("addCtrl", function($scope, $http, API, $window, $location) {
+	$scope.go = function(path) {
+		$location.path(path);
+	};
 	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	$("[name='courseDuration']").inputmask("hh:mm:ss", { alias: "date", "placeholder": " "});
 	$scope.item = {archived:false};
 	$scope.add = function () {
-		$http.post(API + 'items/', $scope.item);
-		$scope.go('/');
+		$http.post(API + 'items/', $scope.item).then(function() {
+			$scope.go('/');
+		});
 	};
 });
 
-app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window) {
+app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window, $location) {
+	$scope.go = function(path) {
+		$location.path(path);
+	};
 	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
@@ -169,8 +188,9 @@ app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, 
 		$scope.item = response.data;
 	});
 	$scope.save = function () {
-		$http.put(API + 'items/' + $routeParams.id, $scope.item);
-		$scope.go('/');
+		$http.put(API + 'items/' + $routeParams.id, $scope.item).then(function() {
+			$scope.go('/');
+		});
 	};	
 });
 
@@ -190,4 +210,20 @@ app.controller("loginCtrl", function($scope, signInData, AuthService) {
 			$scope.showMsg = true;
 		};
 	};
+});
+
+app.directive("appHeader", function(AuthService, $window){
+	var headerDir = {
+		restrict: "E",
+		templateUrl: "templates/header.html",
+		replace: true,
+		scope: {},
+		link: function($scope){
+			$scope.user = $window.localStorage.user;
+			$scope.logout = function() {
+				AuthService.logout();
+			}
+		}
+	}
+	return headerDir;
 });
