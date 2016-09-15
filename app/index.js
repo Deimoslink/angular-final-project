@@ -152,6 +152,7 @@ app.controller("addCtrl", function($scope, $http, API, $window) {
 	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
+	$("[name='courseDuration']").inputmask("hh:mm:ss", { alias: "date", "placeholder": " "});
 	$scope.item = {archived:false};
 	$scope.add = function () {
 		$http.post(API + 'items/', $scope.item);
@@ -163,6 +164,7 @@ app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, 
 	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
+	$("[name='courseDuration']").inputmask("hh:mm:ss", { alias: "date", "placeholder": " "});
 	itemsSvc.get($routeParams.id).then(function(response) {
 		$scope.item = response.data;
 	});

@@ -13,7 +13,7 @@
       "id": 2,
       "title": "Filters",
       "author": "Abigale",
-      "duration": 600000,
+      "duration": "04:53:46",
       "url": "https://www.youtube.com/watch?v=QOqzziWdVzk",
       "archived": false,
       "selected": false
@@ -146,6 +146,14 @@
       "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
       "title": "fsdfsdfsdf",
       "id": 18
+    },
+    {
+      "archived": false,
+      "duration": "06:45:06",
+      "title": "test",
+      "url": "https://www.youtube.com/watch?v=1HqniOYiFy0",
+      "author": "John",
+      "id": 19
     }
   ]
 }
