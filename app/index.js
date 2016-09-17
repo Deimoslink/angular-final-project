@@ -50,11 +50,11 @@ app.config(['$routeProvider', function($routeProvider) {
 	})
 	.when("/items/add", {
 		templateUrl: "templates/add.html",
-		controller: "addCtrl"
+		controller: "newCtrl"
 	})
 	.when("/items/edit/:id", {
 		templateUrl: "templates/edit.html",
-		controller: "editCtrl"
+		controller: "newCtrl"
 	})
 	.when("/login", {
 		templateUrl: "templates/login.html",
@@ -82,16 +82,6 @@ app.controller('mainController', function($scope, $location, itemsSvc, AuthServi
 	$scope.logout = function() {AuthService.logout()}
 
 	$scope.selected = false;
-
-	// $scope.shownElements = 5;
-
-	// $scope.paginationLimit = function() {
-	// 	return $scope.shownElements;
-	// };
-
-	// $scope.showMore = function() {
-	// 	$scope.shownElements += 3;
-	// };
 });
 
 app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc, $location, AuthService) {
@@ -160,7 +150,7 @@ app.controller("mainCtrl", function($scope, $http, API, $window, itemsSvc, $loca
 	}
 });
 
-app.controller("addCtrl", function($scope, $http, API, $window, $location) {
+app.controller("newCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window, $location) {
 	$scope.go = function(path) {
 		$location.path(path);
 	};
@@ -168,38 +158,30 @@ app.controller("addCtrl", function($scope, $http, API, $window, $location) {
 	$scope.user = $window.localStorage.user;
 	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
 	$("[name='courseDuration']").inputmask("hh:mm:ss", { alias: "date", "placeholder": " "});
-	$scope.item = {archived:false};
+	
+	if(window.location.href.indexOf("edit") > -1) {
+		console.log("editing mode");
+		itemsSvc.get($routeParams.id).then(function(response) {
+			$scope.item = response.data;
+		});
+	} else {
+		console.log("adding mode");
+		$scope.item = {archived:false};
+	}
 	$scope.add = function () {
 		$http.post(API + 'items/', $scope.item).then(function() {
 			$scope.go('/');
 		});
 	};
-});
-
-app.controller("editCtrl", function($scope, $routeParams, $http, API, itemsSvc, $window, $location) {
-	$scope.go = function(path) {
-		$location.path(path);
-	};
-	$scope.names = ["John", "Abigale", "Chris", "Robert", "Alexander", "Mitchel", "Dimitry"];
-	$scope.user = $window.localStorage.user;
-	$("[name='courseTitle'], [name='courseAuthor']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
-	$("[name='courseDuration']").inputmask("hh:mm:ss", { alias: "date", "placeholder": " "});
-	itemsSvc.get($routeParams.id).then(function(response) {
-		$scope.item = response.data;
-	});
 	$scope.save = function () {
 		$http.put(API + 'items/' + $routeParams.id, $scope.item).then(function() {
 			$scope.go('/');
 		});
-	};	
+	};
 });
 
 app.controller("loginCtrl", function($scope, signInData, AuthService) {
 	$("[name='username'], [name='password']").inputmask("Regex", {regex: "[0-9,a-z,A-Z_]*"});
-	$scope.userNameTest = function() {
-		console.log($scope.username)
-	}
-
 	$scope.username;
 	$scope.password;
 	$scope.showMsg;
