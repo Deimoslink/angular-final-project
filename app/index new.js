@@ -1,9 +1,4 @@
-const angular = require('angular');
-require('angular-route');
-
-const app = angular.module('myApp', ["ngRoute"]);
-
-require('./directives')(app);
+var app = angular.module('myApp', ["ngRoute"]);
 
 app.run(['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 	$rootScope.$on('$routeChangeStart', function () {

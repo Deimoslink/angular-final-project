@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
-<head lang="en">
-<title>Final Angular Project</title>
+
+<html>
+<head>
+	<title>Final Angular Project</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -12,9 +13,12 @@
 	<script src="js/deps/inputmask.regex.extensions.js"></script>
 	<script src="js/deps/inputmask.date.extensions.js"></script>
 	<script src="js/deps/jquery.inputmask.js"></script>
-	<script src="bundle.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script> -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="index.js"></script>
 </head>
-<body>
-	<ng-view></ng-view>	
+
+<body ng-app="myApp">
+	<div ng-view></div>
 </body>
 </html>
