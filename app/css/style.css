@@ -54,7 +54,7 @@ span.warning {
 }
 
 .avatar {
-	background-image: url("imgs/sovse-maly-yoba.jpg");
+	background-image: url("../imgs/sovse-maly-yoba.jpg");
 	border-radius: 50%;
 	height:50px;
 	width:50px;

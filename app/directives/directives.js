@@ -3,5 +3,6 @@
 // };
 "use strict";
 export default app => {
-	require('./hello-world/hello-world.js')(app);
+	require('./header/header.js')(app);
+	console.log("comes from directives");
 };
